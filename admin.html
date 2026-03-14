@@ -1299,7 +1299,7 @@ async function publishToGitHub() {
     if (!fileRes.ok) throw new Error(`לא ניתן לקרוא את store.js (${fileRes.status})`);
     const fileData = await fileRes.json();
     const sha = fileData.sha;
-    const currentContent = atob(fileData.content.replace(/\n/g, ''));
+    const currentContent = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
 
     // 2. Replace only the PRODUCTS array in store.js
     const newProductsStr = 'const PRODUCTS = ' + JSON.stringify(adminProducts, null, 2) + ';';
