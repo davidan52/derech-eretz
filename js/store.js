@@ -17,6 +17,17 @@ const CAT_LABELS = {
 // ===== STORE DATA =====
 const PRODUCTS = [
   {
+    "id": 1773524550806,
+    "title": "חנוכייה אלומיניום לנרות מהודרת 27x5",
+    "category": "hanukkah",
+    "badge": "חדש",
+    "price": 250,
+    "oldPrice": null,
+    "rating": 4.8,
+    "reviews": 0,
+    "img": "https://www.israel-judaica.com/downloads/product_UK42374.jpg"
+  },
+  {
     "id": 1773521779463,
     "title": "מזוזה \"סמנט בטון\" \"האש שלי\" רחבה גוון לבן 12 ס\"מ",
     "category": "mezuzot",
