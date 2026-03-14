@@ -18,14 +18,14 @@ const CAT_LABELS = {
 const PRODUCTS = [
   {
     "id": 1773521779463,
-    "title": "מזוזה",
+    "title": "מזוזה \"סמנט בטון\" \"האש שלי\" רחבה גוון לבן 12 ס\"מ",
     "category": "mezuzot",
     "badge": null,
     "price": 150,
     "oldPrice": null,
     "rating": 4.8,
     "reviews": 0,
-    "img": "https://www.israel-judaica.com/downloads/product_UK24820.jpg הכנס URL לתצוגה מקדימה 💾 שמור מוצרביטול ✓"
+    "img": "https://www.israel-judaica.com/downloads/product_UK24820.jpg"
   },
   {
     "id": 1,
