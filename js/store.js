@@ -1,161 +1,286 @@
 // ===== CATEGORY LABELS =====
 const CAT_LABELS = {
-  kiddush:   'כוסות קידוש',
-  shabbat:   'שבת והבדלה',
-  mezuzot:   'מזוזות',
-  tallitot:  'טליתות',
-  tefillin:  'תפילין',
-  kippot:    'כיפות',
-  hanukkah:  'חנוכה',
-  pesach:    'פסח',
-  wedding:   'חתונה',
-  tzedakah:  'קופות צדקה',
-  jewelry:   'תכשיטים',
-  synagogue: 'כלי בית כנסת',
+  kiddush:   '×××¡××ª ×§××××©',
+  shabbat:   '×©××ª ××××××',
+  mezuzot:   '××××××ª',
+  tallitot:  '××××ª××ª',
+  tefillin:  '×ª×¤××××',
+  kippot:    '×××¤××ª',
+  hanukkah:  '×× ×××',
+  pesach:    '×¤×¡×',
+  wedding:   '××ª×× ×',
+  tzedakah:  '×§××¤××ª ×¦××§×',
+  jewelry:   '×ª××©××××',
+  synagogue: '××× ×××ª ×× ×¡×ª',
 };
 
 // ===== STORE DATA =====
-// Prices below are RETAIL (you set these — typically 2x–3x your wholesale cost)
+// Prices below are RETAIL (you set these â typically 2xâ3x your wholesale cost)
 const PRODUCTS = [
-  // --- כוסות קידוש ---
   {
-    id: 1, title: 'כוס קידוש כסף מצופה – עיצוב קלאסי', price: 320, oldPrice: 390,
-    rating: 4.9, reviews: 88, badge: 'מומלץ', category: 'kiddush',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'
+    "id": 1,
+    "title": "כוס קידוש כסף מצופה – עיצוב קלאסי",
+    "category": "kiddush",
+    "badge": "מומלץ",
+    "price": 320,
+    "oldPrice": 390,
+    "rating": 4.9,
+    "reviews": 88,
+    "img": "https://www.israel-judaica.com/big/42437.jpg"
   },
   {
-    id: 2, title: 'כוס קידוש אקריל וזהב – מודרני', price: 185, oldPrice: null,
-    rating: 4.7, reviews: 43, badge: 'חדש', category: 'kiddush',
-    img: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80'
+    "id": 2,
+    "title": "כוס קידוש אקריל וזהב – מודרני",
+    "price": 185,
+    "oldPrice": null,
+    "rating": 4.7,
+    "reviews": 43,
+    "badge": "חדש",
+    "category": "kiddush",
+    "img": "https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80"
   },
   {
-    id: 3, title: 'כוס קידוש קריסטל עם בסיס כסף', price: 260, oldPrice: 320,
-    rating: 4.8, reviews: 61, badge: 'מבצע', category: 'kiddush',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'
-  },
-
-  // --- שבת ---
-  {
-    id: 4, title: 'פמוטים מכסף – זוג, עיצוב ירושלמי', price: 420, oldPrice: 520,
-    rating: 4.9, reviews: 102, badge: 'מומלץ', category: 'shabbat',
-    img: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80'
-  },
-  {
-    id: 5, title: 'לוח חלה עם סכין – עץ זית', price: 165, oldPrice: null,
-    rating: 4.7, reviews: 55, badge: null, category: 'shabbat',
-    img: 'https://images.unsplash.com/photo-1549590143-d5855148a9d5?w=400&q=80'
+    "id": 3,
+    "title": "כוס קידוש קריסטל עם בסיס כסף",
+    "price": 260,
+    "oldPrice": 320,
+    "rating": 4.8,
+    "reviews": 61,
+    "badge": "מבצע",
+    "category": "kiddush",
+    "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80"
   },
   {
-    id: 6, title: 'בשמים לבדלה – כסף מצופה', price: 290, oldPrice: null,
-    rating: 4.8, reviews: 39, badge: 'חדש', category: 'shabbat',
-    img: 'https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80'
+    "id": 4,
+    "title": "פמוטים מכסף – זוג, עיצוב ירושלמי",
+    "price": 420,
+    "oldPrice": 520,
+    "rating": 4.9,
+    "reviews": 102,
+    "badge": "מומלץ",
+    "category": "shabbat",
+    "img": "https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80"
   },
   {
-    id: 7, title: 'מפה לחלות – רקמה ידנית, כחול-לבן', price: 145, oldPrice: 185,
-    rating: 4.6, reviews: 47, badge: 'מבצע', category: 'shabbat',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'
-  },
-
-  // --- מזוזות ---
-  {
-    id: 8, title: 'מזוזה כסף 925 – פרשיה מהודרת', price: 340, oldPrice: null,
-    rating: 5.0, reviews: 134, badge: 'מומלץ', category: 'mezuzot',
-    img: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&q=80'
-  },
-  {
-    id: 9, title: 'מזוזה אקריל וזהב – עיצוב מודרני', price: 120, oldPrice: null,
-    rating: 4.6, reviews: 78, badge: null, category: 'mezuzot',
-    img: 'https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80'
+    "id": 5,
+    "title": "לוח חלה עם סכין – עץ זית",
+    "price": 165,
+    "oldPrice": null,
+    "rating": 4.7,
+    "reviews": 55,
+    "badge": null,
+    "category": "shabbat",
+    "img": "https://images.unsplash.com/photo-1549590143-d5855148a9d5?w=400&q=80"
   },
   {
-    id: 10, title: 'מזוזה קרמיקה ציורית – ארץ ישראל', price: 95, oldPrice: 120,
-    rating: 4.7, reviews: 53, badge: 'מבצע', category: 'mezuzot',
-    img: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&q=80'
-  },
-
-  // --- טליתות ---
-  {
-    id: 11, title: 'טלית גדול – צמר מרינו, פסים כחולים', price: 490, oldPrice: null,
-    rating: 5.0, reviews: 47, badge: 'חדש', category: 'tallitot',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'
-  },
-  {
-    id: 12, title: 'טלית קטן כותנה – לבן קלאסי', price: 120, oldPrice: 150,
-    rating: 4.8, reviews: 89, badge: 'מבצע', category: 'tallitot',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'
-  },
-
-  // --- כיפות ---
-  {
-    id: 13, title: 'כיפה סרוגה – עבודת יד, לבן-תכלת', price: 55, oldPrice: null,
-    rating: 4.7, reviews: 210, badge: null, category: 'kippot',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'
+    "id": 6,
+    "title": "בשמים לבדלה – כסף מצופה",
+    "price": 290,
+    "oldPrice": null,
+    "rating": 4.8,
+    "reviews": 39,
+    "badge": "חדש",
+    "category": "shabbat",
+    "img": "https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80"
   },
   {
-    id: 14, title: 'כיפה מעור – שחור, חלק', price: 95, oldPrice: null,
-    rating: 4.5, reviews: 143, badge: null, category: 'kippot',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'
+    "id": 7,
+    "title": "מפה לחלות – רקמה ידנית, כחול-לבן",
+    "price": 145,
+    "oldPrice": 185,
+    "rating": 4.6,
+    "reviews": 47,
+    "badge": "מבצע",
+    "category": "shabbat",
+    "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80"
   },
   {
-    id: 15, title: 'כיפה קטיפה – לחתן', price: 75, oldPrice: null,
-    rating: 4.9, reviews: 67, badge: 'חדש', category: 'kippot',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'
-  },
-
-  // --- חנוכה ---
-  {
-    id: 16, title: 'חנוכייה כסף מצופה – עיצוב ירושלמי', price: 380, oldPrice: 460,
-    rating: 4.8, reviews: 91, badge: 'מבצע', category: 'hanukkah',
-    img: 'https://images.unsplash.com/photo-1576662712957-9c79ae1280f8?w=400&q=80'
-  },
-  {
-    id: 17, title: 'חנוכייה אקריל וזהב – מודרנית', price: 195, oldPrice: null,
-    rating: 4.6, reviews: 54, badge: null, category: 'hanukkah',
-    img: 'https://images.unsplash.com/photo-1576662712957-9c79ae1280f8?w=400&q=80'
-  },
-
-  // --- פסח ---
-  {
-    id: 18, title: 'קערת סדר פסח – קרמיקה מצוירת', price: 320, oldPrice: null,
-    rating: 4.9, reviews: 44, badge: 'מומלץ', category: 'pesach',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'
+    "id": 8,
+    "title": "מזוזה כסף 925 – פרשיה מהודרת",
+    "price": 340,
+    "oldPrice": null,
+    "rating": 5,
+    "reviews": 134,
+    "badge": "מומלץ",
+    "category": "mezuzot",
+    "img": "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&q=80"
   },
   {
-    id: 19, title: 'כוס מרים + כוס אליהו – סט', price: 245, oldPrice: 300,
-    rating: 4.7, reviews: 37, badge: 'מבצע', category: 'pesach',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'
-  },
-
-  // --- חתונה ---
-  {
-    id: 20, title: 'טבעת קידושין – זהב 14K', price: 1200, oldPrice: null,
-    rating: 5.0, reviews: 28, badge: 'מומלץ', category: 'wedding',
-    img: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80'
-  },
-  {
-    id: 21, title: 'כוס שבירה לחתן – כסף עם תיק', price: 185, oldPrice: null,
-    rating: 4.8, reviews: 61, badge: 'חדש', category: 'wedding',
-    img: 'https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80'
-  },
-
-  // --- קופות צדקה ---
-  {
-    id: 22, title: 'קופת צדקה כסף – עיצוב ירושלים', price: 160, oldPrice: null,
-    rating: 4.7, reviews: 72, badge: null, category: 'tzedakah',
-    img: 'https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80'
-  },
-
-  // --- תכשיטים ---
-  {
-    id: 23, title: 'שרשרת חמסה – כסף 925', price: 280, oldPrice: null,
-    rating: 4.9, reviews: 115, badge: 'מומלץ', category: 'jewelry',
-    img: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80'
+    "id": 9,
+    "title": "מזוזה אקריל וזהב – עיצוב מודרני",
+    "price": 120,
+    "oldPrice": null,
+    "rating": 4.6,
+    "reviews": 78,
+    "badge": null,
+    "category": "mezuzot",
+    "img": "https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80"
   },
   {
-    id: 24, title: 'עגילי מגן דוד – זהב 14K', price: 490, oldPrice: 580,
-    rating: 4.8, reviews: 39, badge: 'מבצע', category: 'jewelry',
-    img: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80'
+    "id": 10,
+    "title": "מזוזה קרמיקה ציורית – ארץ ישראל",
+    "price": 95,
+    "oldPrice": 120,
+    "rating": 4.7,
+    "reviews": 53,
+    "badge": "מבצע",
+    "category": "mezuzot",
+    "img": "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&q=80"
   },
+  {
+    "id": 11,
+    "title": "טלית גדול – צמר מרינו, פסים כחולים",
+    "price": 490,
+    "oldPrice": null,
+    "rating": 5,
+    "reviews": 47,
+    "badge": "חדש",
+    "category": "tallitot",
+    "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80"
+  },
+  {
+    "id": 12,
+    "title": "טלית קטן כותנה – לבן קלאסי",
+    "price": 120,
+    "oldPrice": 150,
+    "rating": 4.8,
+    "reviews": 89,
+    "badge": "מבצע",
+    "category": "tallitot",
+    "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80"
+  },
+  {
+    "id": 13,
+    "title": "כיפה סרוגה – עבודת יד, לבן-תכלת",
+    "price": 55,
+    "oldPrice": null,
+    "rating": 4.7,
+    "reviews": 210,
+    "badge": null,
+    "category": "kippot",
+    "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80"
+  },
+  {
+    "id": 14,
+    "title": "כיפה מעור – שחור, חלק",
+    "price": 95,
+    "oldPrice": null,
+    "rating": 4.5,
+    "reviews": 143,
+    "badge": null,
+    "category": "kippot",
+    "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80"
+  },
+  {
+    "id": 15,
+    "title": "כיפה קטיפה – לחתן",
+    "price": 75,
+    "oldPrice": null,
+    "rating": 4.9,
+    "reviews": 67,
+    "badge": "חדש",
+    "category": "kippot",
+    "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80"
+  },
+  {
+    "id": 16,
+    "title": "חנוכייה כסף מצופה – עיצוב ירושלמי",
+    "price": 380,
+    "oldPrice": 460,
+    "rating": 4.8,
+    "reviews": 91,
+    "badge": "מבצע",
+    "category": "hanukkah",
+    "img": "https://images.unsplash.com/photo-1576662712957-9c79ae1280f8?w=400&q=80"
+  },
+  {
+    "id": 17,
+    "title": "חנוכייה אקריל וזהב – מודרנית",
+    "price": 195,
+    "oldPrice": null,
+    "rating": 4.6,
+    "reviews": 54,
+    "badge": null,
+    "category": "hanukkah",
+    "img": "https://images.unsplash.com/photo-1576662712957-9c79ae1280f8?w=400&q=80"
+  },
+  {
+    "id": 18,
+    "title": "קערת סדר פסח – קרמיקה מצוירת",
+    "price": 320,
+    "oldPrice": null,
+    "rating": 4.9,
+    "reviews": 44,
+    "badge": "מומלץ",
+    "category": "pesach",
+    "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80"
+  },
+  {
+    "id": 19,
+    "title": "כוס מרים + כוס אליהו – סט",
+    "price": 245,
+    "oldPrice": 300,
+    "rating": 4.7,
+    "reviews": 37,
+    "badge": "מבצע",
+    "category": "pesach",
+    "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80"
+  },
+  {
+    "id": 20,
+    "title": "טבעת קידושין – זהב 14K",
+    "price": 1200,
+    "oldPrice": null,
+    "rating": 5,
+    "reviews": 28,
+    "badge": "מומלץ",
+    "category": "wedding",
+    "img": "https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80"
+  },
+  {
+    "id": 21,
+    "title": "כוס שבירה לחתן – כסף עם תיק",
+    "price": 185,
+    "oldPrice": null,
+    "rating": 4.8,
+    "reviews": 61,
+    "badge": "חדש",
+    "category": "wedding",
+    "img": "https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80"
+  },
+  {
+    "id": 22,
+    "title": "קופת צדקה כסף – עיצוב ירושלים",
+    "price": 160,
+    "oldPrice": null,
+    "rating": 4.7,
+    "reviews": 72,
+    "badge": null,
+    "category": "tzedakah",
+    "img": "https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80"
+  },
+  {
+    "id": 23,
+    "title": "שרשרת חמסה – כסף 925",
+    "price": 280,
+    "oldPrice": null,
+    "rating": 4.9,
+    "reviews": 115,
+    "badge": "מומלץ",
+    "category": "jewelry",
+    "img": "https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80"
+  },
+  {
+    "id": 24,
+    "title": "עגילי מגן דוד – זהב 14K",
+    "price": 490,
+    "oldPrice": 580,
+    "rating": 4.8,
+    "reviews": 39,
+    "badge": "מבצע",
+    "category": "jewelry",
+    "img": "https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80"
+  }
 ];
 
 // ===== STATE =====
@@ -169,20 +294,20 @@ const FREE_SHIPPING_THRESHOLD = 199;
 
 // ===== HELPERS =====
 const $ = id => document.getElementById(id);
-const formatPrice = n => `₪${n.toLocaleString('he-IL')}`;
+const formatPrice = n => `âª${n.toLocaleString('he-IL')}`;
 
 function stars(rating) {
   const full = Math.floor(rating);
   const half = rating % 1 >= 0.5;
-  let s = '★'.repeat(full);
-  if (half) s += '½';
-  while (s.replace('½','x').length < 5) s += '☆';
+  let s = 'â'.repeat(full);
+  if (half) s += 'Â½';
+  while (s.replace('Â½','x').length < 5) s += 'â';
   return s;
 }
 
 function badgeClass(badge) {
   if (!badge) return '';
-  const map = { 'חדש': 'new', 'מבצע': 'sale', 'מומלץ': '' };
+  const map = { '×××©': 'new', '×××¦×¢': 'sale', '×××××¥': '' };
   return map[badge] ?? '';
 }
 
@@ -212,15 +337,15 @@ function renderProducts() {
   const start = (currentPage - 1) * PER_PAGE;
   const page = filtered.slice(start, start + PER_PAGE);
 
-  countEl.innerHTML = `מציג <strong>${start + 1}–${Math.min(start + page.length, total)}</strong> מתוך <strong>${total}</strong> מוצרים`;
+  countEl.innerHTML = `××¦×× <strong>${start + 1}â${Math.min(start + page.length, total)}</strong> ××ª×× <strong>${total}</strong> ×××¦×¨××`;
 
   grid.innerHTML = page.map(p => `
     <div class="product-card" data-id="${p.id}">
       <div class="product-img-wrap">
         <img src="${p.img}" alt="${p.title}" loading="lazy">
         ${p.badge ? `<span class="badge ${badgeClass(p.badge)}">${p.badge}</span>` : ''}
-        <button class="wishlist-btn" title="הוסף למועדפים" onclick="toggleWish(event, ${p.id})">♡</button>
-        <button class="quick-add" onclick="addToCart(${p.id})">+ הוספה לסל</button>
+        <button class="wishlist-btn" title="×××¡×£ ××××¢××¤××" onclick="toggleWish(event, ${p.id})">â¡</button>
+        <button class="quick-add" onclick="addToCart(${p.id})">+ ×××¡×¤× ××¡×</button>
       </div>
       <div class="product-info">
         <div class="product-category">${CAT_LABELS[p.category] || ''}</div>
@@ -234,7 +359,7 @@ function renderProducts() {
             ${p.oldPrice ? `<span class="price-old">${formatPrice(p.oldPrice)}</span>` : ''}
             <span class="price">${formatPrice(p.price)}</span>
           </div>
-          <button class="add-to-cart" onclick="addToCart(${p.id})">+ הוסף</button>
+          <button class="add-to-cart" onclick="addToCart(${p.id})">+ ×××¡×£</button>
         </div>
       </div>
     </div>
@@ -249,17 +374,17 @@ function renderPagination(total) {
   const el = $('pagination');
   if (pages <= 1) { el.innerHTML = ''; return; }
 
-  let html = `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>›</button>`;
+  let html = `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>âº</button>`;
 
   for (let i = 1; i <= pages; i++) {
     if (i === 1 || i === pages || Math.abs(i - currentPage) <= 2) {
       html += `<button class="page-btn ${i===currentPage?'active':''}" onclick="goPage(${i})">${i}</button>`;
     } else if (Math.abs(i - currentPage) === 3) {
-      html += `<span style="padding:0 4px;color:var(--text-muted)">…</span>`;
+      html += `<span style="padding:0 4px;color:var(--text-muted)">â¦</span>`;
     }
   }
 
-  html += `<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===pages?'disabled':''}>‹</button>`;
+  html += `<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===pages?'disabled':''}>â¹</button>`;
   el.innerHTML = html;
 }
 
@@ -296,7 +421,7 @@ function addToCart(id) {
   }
   saveCart();
   updateCartUI();
-  showToast(`"${product.title.slice(0, 25)}..." נוסף לסל`);
+  showToast(`"${product.title.slice(0, 25)}..." × ××¡×£ ××¡×`);
 }
 
 function removeFromCart(id) {
@@ -331,14 +456,14 @@ function renderCartItems() {
   const progress = Math.min((total / FREE_SHIPPING_THRESHOLD) * 100, 100);
 
   $('freeShippingText').innerHTML = remaining > 0
-    ? `עוד <strong>${formatPrice(remaining)}</strong> למשלוח חינם`
-    : `<strong>🎉 קיבלת משלוח חינם!</strong>`;
+    ? `×¢×× <strong>${formatPrice(remaining)}</strong> ×××©××× ××× ×`
+    : `<strong>ð ×§××××ª ××©××× ××× ×!</strong>`;
 
   $('freeShippingProgress').style.width = `${progress}%`;
   $('cartTotal').textContent = formatPrice(total);
 
   if (cart.length === 0) {
-    container.innerHTML = '<div class="cart-empty">🛒<br>הסל שלך ריק</div>';
+    container.innerHTML = '<div class="cart-empty">ð<br>××¡× ×©×× ×¨××§</div>';
     return;
   }
 
@@ -349,12 +474,12 @@ function renderCartItems() {
         <div class="cart-item-name">${item.title}</div>
         <div class="cart-item-price">${formatPrice(item.price * item.qty)}</div>
         <div class="cart-item-qty">
-          <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+          <button class="qty-btn" onclick="changeQty(${item.id}, -1)">â</button>
           <span class="qty-val">${item.qty}</span>
           <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
         </div>
       </div>
-      <button class="remove-item" onclick="removeFromCart(${item.id})" title="הסר">×</button>
+      <button class="remove-item" onclick="removeFromCart(${item.id})" title="××¡×¨">Ã</button>
     </div>
   `).join('');
 }
@@ -380,10 +505,10 @@ function toggleWish(e, id) {
   const btn = e.currentTarget;
   if (wishlist.includes(id)) {
     wishlist = wishlist.filter(i => i !== id);
-    btn.textContent = '♡';
+    btn.textContent = 'â¡';
   } else {
     wishlist.push(id);
-    btn.textContent = '♥';
+    btn.textContent = 'â¥';
     btn.style.color = '#e74c3c';
   }
   localStorage.setItem('wishlist', JSON.stringify(wishlist));
@@ -443,7 +568,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Checkout
   $('checkoutBtn').addEventListener('click', () => {
-    if (cart.length === 0) { showToast('הסל שלך ריק'); return; }
-    showToast('מעביר לתשלום...');
+    if (cart.length === 0) { showToast('××¡× ×©×× ×¨××§'); return; }
+    showToast('××¢×××¨ ××ª×©×××...');
   });
 });
