@@ -548,6 +548,13 @@ function handleSort(e) {
   renderProducts();
 }
 
+// ===== LOAD ADMIN PRODUCTS IF AVAILABLE =====
+const savedAdminProducts = JSON.parse(localStorage.getItem('adminProducts') || 'null');
+if (savedAdminProducts && savedAdminProducts.length > 0) {
+  PRODUCTS.length = 0;
+  savedAdminProducts.forEach(p => PRODUCTS.push(p));
+}
+
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
   renderProducts();
