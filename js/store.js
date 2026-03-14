@@ -73,14 +73,14 @@ const PRODUCTS = [
   },
   {
     "id": 4,
-    "title": "פמוטים מכסף – זוג, עיצוב ירושלמי",
+    "title": "פמוטים מכסף – זוג, עיצוב ירושלמי זוג פמוטים \"פולימר\" \"כותל\" מהודרים 12 ס\"מ",
+    "category": "shabbat",
+    "badge": "מומלץ",
     "price": 420,
     "oldPrice": 520,
     "rating": 4.9,
     "reviews": 102,
-    "badge": "מומלץ",
-    "category": "shabbat",
-    "img": "https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80"
+    "img": "https://www.israel-judaica.com/downloads/product_UK81482.jpg"
   },
   {
     "id": 5,
