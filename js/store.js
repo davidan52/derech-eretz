@@ -17,125 +17,269 @@ const CAT_LABELS = {
 // ===== STORE DATA =====
 const PRODUCTS = [
   {
-    id: 1, title: 'כוס קידוש כסף מצופה – עיצוב קלאסי', price: 320, oldPrice: 390,
-    rating: 4.9, reviews: 88, badge: 'מומלץ', category: 'kiddush',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'
+    "id": 1,
+    "title": "כוס באבא סאלי",
+    "category": "kiddush",
+    "badge": "מומלץ",
+    "price": 320,
+    "oldPrice": 390,
+    "rating": 4.9,
+    "reviews": 88,
+    "img": "https://www.israel-judaica.com/big/42437.jpg"
   },
   {
-    id: 2, title: 'כוס קידוש אקריל וזהב – מודרני', price: 185, oldPrice: null,
-    rating: 4.7, reviews: 43, badge: 'חדש', category: 'kiddush',
-    img: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80'
+    "id": 2,
+    "title": "גביע קריסטל מהודר ללא רגל \"האש שלי\" 9 ס\"מ תכולה 100 מ\"ל",
+    "category": "kiddush",
+    "badge": "חדש",
+    "price": 185,
+    "oldPrice": null,
+    "rating": 4.7,
+    "reviews": 43,
+    "img": "https://www.israel-judaica.com/big/47092.jpg"
   },
   {
-    id: 3, title: 'כוס קידוש קריסטל עם בסיס כסף', price: 260, oldPrice: 320,
-    rating: 4.8, reviews: 61, badge: 'מבצע', category: 'kiddush',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'
+    "id": 3,
+    "title": "כוס קידוש קריסטל עם בסיס כסף",
+    "price": 260,
+    "oldPrice": 320,
+    "rating": 4.8,
+    "reviews": 61,
+    "badge": "מבצע",
+    "category": "kiddush",
+    "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80"
   },
   {
-    id: 4, title: 'פמוטים מכסף – זוג, עיצוב ירושלמי', price: 420, oldPrice: 520,
-    rating: 4.9, reviews: 102, badge: 'מומלץ', category: 'shabbat',
-    img: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80'
+    "id": 4,
+    "title": "פמוטים מכסף – זוג, עיצוב ירושלמי",
+    "price": 420,
+    "oldPrice": 520,
+    "rating": 4.9,
+    "reviews": 102,
+    "badge": "מומלץ",
+    "category": "shabbat",
+    "img": "https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80"
   },
   {
-    id: 5, title: 'לוח חלה עם סכין – עץ זית', price: 165, oldPrice: null,
-    rating: 4.7, reviews: 55, badge: null, category: 'shabbat',
-    img: 'https://images.unsplash.com/photo-1549590143-d5855148a9d5?w=400&q=80'
+    "id": 5,
+    "title": "לוח חלה עם סכין – עץ זית",
+    "price": 165,
+    "oldPrice": null,
+    "rating": 4.7,
+    "reviews": 55,
+    "badge": null,
+    "category": "shabbat",
+    "img": "https://images.unsplash.com/photo-1549590143-d5855148a9d5?w=400&q=80"
   },
   {
-    id: 6, title: 'בשמים לבדלה – כסף מצופה', price: 290, oldPrice: null,
-    rating: 4.8, reviews: 39, badge: 'חדש', category: 'shabbat',
-    img: 'https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80'
+    "id": 6,
+    "title": "בשמים לבדלה – כסף מצופה",
+    "price": 290,
+    "oldPrice": null,
+    "rating": 4.8,
+    "reviews": 39,
+    "badge": "חדש",
+    "category": "shabbat",
+    "img": "https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80"
   },
   {
-    id: 7, title: 'מפה לחלות – רקמה ידנית, כחול-לבן', price: 145, oldPrice: 185,
-    rating: 4.6, reviews: 47, badge: 'מבצע', category: 'shabbat',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'
+    "id": 7,
+    "title": "מפה לחלות – רקמה ידנית, כחול-לבן",
+    "price": 145,
+    "oldPrice": 185,
+    "rating": 4.6,
+    "reviews": 47,
+    "badge": "מבצע",
+    "category": "shabbat",
+    "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80"
   },
   {
-    id: 8, title: 'מזוזה כסף 925 – פרשיה מהודרת', price: 340, oldPrice: null,
-    rating: 5.0, reviews: 134, badge: 'מומלץ', category: 'mezuzot',
-    img: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&q=80'
+    "id": 8,
+    "title": "מזוזה כסף 925 – פרשיה מהודרת",
+    "price": 340,
+    "oldPrice": null,
+    "rating": 5,
+    "reviews": 134,
+    "badge": "מומלץ",
+    "category": "mezuzot",
+    "img": "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&q=80"
   },
   {
-    id: 9, title: 'מזוזה אקריל וזהב – עיצוב מודרני', price: 120, oldPrice: null,
-    rating: 4.6, reviews: 78, badge: null, category: 'mezuzot',
-    img: 'https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80'
+    "id": 9,
+    "title": "מזוזה אקריל וזהב – עיצוב מודרני",
+    "price": 120,
+    "oldPrice": null,
+    "rating": 4.6,
+    "reviews": 78,
+    "badge": null,
+    "category": "mezuzot",
+    "img": "https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80"
   },
   {
-    id: 10, title: 'מזוזה קרמיקה ציורית – ארץ ישראל', price: 95, oldPrice: 120,
-    rating: 4.7, reviews: 53, badge: 'מבצע', category: 'mezuzot',
-    img: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&q=80'
+    "id": 10,
+    "title": "מזוזה קרמיקה ציורית – ארץ ישראל",
+    "price": 95,
+    "oldPrice": 120,
+    "rating": 4.7,
+    "reviews": 53,
+    "badge": "מבצע",
+    "category": "mezuzot",
+    "img": "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&q=80"
   },
   {
-    id: 11, title: 'טלית גדול – צמר מרינו, פסים כחולים', price: 490, oldPrice: null,
-    rating: 5.0, reviews: 47, badge: 'חדש', category: 'tallitot',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'
+    "id": 11,
+    "title": "טלית גדול – צמר מרינו, פסים כחולים",
+    "price": 490,
+    "oldPrice": null,
+    "rating": 5,
+    "reviews": 47,
+    "badge": "חדש",
+    "category": "tallitot",
+    "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80"
   },
   {
-    id: 12, title: 'טלית קטן כותנה – לבן קלאסי', price: 120, oldPrice: 150,
-    rating: 4.8, reviews: 89, badge: 'מבצע', category: 'tallitot',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'
+    "id": 12,
+    "title": "טלית קטן כותנה – לבן קלאסי",
+    "price": 120,
+    "oldPrice": 150,
+    "rating": 4.8,
+    "reviews": 89,
+    "badge": "מבצע",
+    "category": "tallitot",
+    "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80"
   },
   {
-    id: 13, title: 'כיפה סרוגה – עבודת יד, לבן-תכלת', price: 55, oldPrice: null,
-    rating: 4.7, reviews: 210, badge: null, category: 'kippot',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'
+    "id": 13,
+    "title": "כיפה סרוגה – עבודת יד, לבן-תכלת",
+    "price": 55,
+    "oldPrice": null,
+    "rating": 4.7,
+    "reviews": 210,
+    "badge": null,
+    "category": "kippot",
+    "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80"
   },
   {
-    id: 14, title: 'כיפה מעור – שחור, חלק', price: 95, oldPrice: null,
-    rating: 4.5, reviews: 143, badge: null, category: 'kippot',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'
+    "id": 14,
+    "title": "כיפה מעור – שחור, חלק",
+    "price": 95,
+    "oldPrice": null,
+    "rating": 4.5,
+    "reviews": 143,
+    "badge": null,
+    "category": "kippot",
+    "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80"
   },
   {
-    id: 15, title: 'כיפה קטיפה – לחתן', price: 75, oldPrice: null,
-    rating: 4.9, reviews: 67, badge: 'חדש', category: 'kippot',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'
+    "id": 15,
+    "title": "כיפה קטיפה – לחתן",
+    "price": 75,
+    "oldPrice": null,
+    "rating": 4.9,
+    "reviews": 67,
+    "badge": "חדש",
+    "category": "kippot",
+    "img": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80"
   },
   {
-    id: 16, title: 'חנוכייה כסף מצופה – עיצוב ירושלמי', price: 380, oldPrice: 460,
-    rating: 4.8, reviews: 91, badge: 'מבצע', category: 'hanukkah',
-    img: 'https://images.unsplash.com/photo-1576662712957-9c79ae1280f8?w=400&q=80'
+    "id": 16,
+    "title": "חנוכייה כסף מצופה – עיצוב ירושלמי",
+    "price": 380,
+    "oldPrice": 460,
+    "rating": 4.8,
+    "reviews": 91,
+    "badge": "מבצע",
+    "category": "hanukkah",
+    "img": "https://images.unsplash.com/photo-1576662712957-9c79ae1280f8?w=400&q=80"
   },
   {
-    id: 17, title: 'חנוכייה אקריל וזהב – מודרנית', price: 195, oldPrice: null,
-    rating: 4.6, reviews: 54, badge: null, category: 'hanukkah',
-    img: 'https://images.unsplash.com/photo-1576662712957-9c79ae1280f8?w=400&q=80'
+    "id": 17,
+    "title": "חנוכייה אקריל וזהב – מודרנית",
+    "price": 195,
+    "oldPrice": null,
+    "rating": 4.6,
+    "reviews": 54,
+    "badge": null,
+    "category": "hanukkah",
+    "img": "https://images.unsplash.com/photo-1576662712957-9c79ae1280f8?w=400&q=80"
   },
   {
-    id: 18, title: 'קערת סדר פסח – קרמיקה מצוירת', price: 320, oldPrice: null,
-    rating: 4.9, reviews: 44, badge: 'מומלץ', category: 'pesach',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'
+    "id": 18,
+    "title": "קערת סדר פסח – קרמיקה מצוירת",
+    "price": 320,
+    "oldPrice": null,
+    "rating": 4.9,
+    "reviews": 44,
+    "badge": "מומלץ",
+    "category": "pesach",
+    "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80"
   },
   {
-    id: 19, title: 'כוס מרים + כוס אליהו – סט', price: 245, oldPrice: 300,
-    rating: 4.7, reviews: 37, badge: 'מבצע', category: 'pesach',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80'
+    "id": 19,
+    "title": "כוס מרים + כוס אליהו – סט",
+    "price": 245,
+    "oldPrice": 300,
+    "rating": 4.7,
+    "reviews": 37,
+    "badge": "מבצע",
+    "category": "pesach",
+    "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80"
   },
   {
-    id: 20, title: 'טבעת קידושין – זהב 14K', price: 1200, oldPrice: null,
-    rating: 5.0, reviews: 28, badge: 'מומלץ', category: 'wedding',
-    img: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80'
+    "id": 20,
+    "title": "טבעת קידושין – זהב 14K",
+    "price": 1200,
+    "oldPrice": null,
+    "rating": 5,
+    "reviews": 28,
+    "badge": "מומלץ",
+    "category": "wedding",
+    "img": "https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80"
   },
   {
-    id: 21, title: 'כוס שבירה לחתן – כסף עם תיק', price: 185, oldPrice: null,
-    rating: 4.8, reviews: 61, badge: 'חדש', category: 'wedding',
-    img: 'https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80'
+    "id": 21,
+    "title": "כוס שבירה לחתן – כסף עם תיק",
+    "price": 185,
+    "oldPrice": null,
+    "rating": 4.8,
+    "reviews": 61,
+    "badge": "חדש",
+    "category": "wedding",
+    "img": "https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80"
   },
   {
-    id: 22, title: 'קופת צדקה כסף – עיצוב ירושלים', price: 160, oldPrice: null,
-    rating: 4.7, reviews: 72, badge: null, category: 'tzedakah',
-    img: 'https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80'
+    "id": 22,
+    "title": "קופת צדקה כסף – עיצוב ירושלים",
+    "price": 160,
+    "oldPrice": null,
+    "rating": 4.7,
+    "reviews": 72,
+    "badge": null,
+    "category": "tzedakah",
+    "img": "https://images.unsplash.com/photo-1582560475093-ba66accbc424?w=400&q=80"
   },
   {
-    id: 23, title: 'שרשרת חמסה – כסף 925', price: 280, oldPrice: null,
-    rating: 4.9, reviews: 115, badge: 'מומלץ', category: 'jewelry',
-    img: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80'
+    "id": 23,
+    "title": "שרשרת חמסה – כסף 925",
+    "price": 280,
+    "oldPrice": null,
+    "rating": 4.9,
+    "reviews": 115,
+    "badge": "מומלץ",
+    "category": "jewelry",
+    "img": "https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80"
   },
   {
-    id: 24, title: 'עגילי מגן דוד – זהב 14K', price: 490, oldPrice: 580,
-    rating: 4.8, reviews: 39, badge: 'מבצע', category: 'jewelry',
-    img: 'https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80'
-  },
+    "id": 24,
+    "title": "עגילי מגן דוד – זהב 14K",
+    "price": 490,
+    "oldPrice": 580,
+    "rating": 4.8,
+    "reviews": 39,
+    "badge": "מבצע",
+    "category": "jewelry",
+    "img": "https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80"
+  }
 ];
 
 // ===== STATE =====
