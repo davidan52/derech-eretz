@@ -208,7 +208,80 @@
 
     .topbar h1 { font-size: 18px; font-weight: 700; }
 
-    .topbar-actions { display: flex; gap: 10px; }
+    .topbar-actions { display: flex; gap: 10px; align-items: center; }
+
+    .btn-publish {
+      background: linear-gradient(135deg, #1a6b3a, #27ae60);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-publish:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-publish:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .btn-publish.loading::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+      animation: shimmer 1.2s infinite;
+    }
+    @keyframes shimmer { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+    /* GitHub Settings Modal */
+    .gh-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26,18,8,0.55);
+      z-index: 600;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(2px);
+    }
+    .gh-modal-overlay.open { display: flex; }
+    .gh-modal {
+      background: #fff;
+      border-radius: 12px;
+      width: 480px;
+      max-width: calc(100vw - 32px);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+    .gh-modal-header {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .gh-modal-header h3 { font-size: 15px; font-weight: 700; }
+    .gh-modal-body { padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+    .gh-modal-footer { padding: 14px 22px; border-top: 1px solid var(--border); display: flex; gap: 10px; }
+    .gh-status {
+      font-size: 12px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      display: none;
+    }
+    .gh-status.success { background: rgba(39,174,96,0.1); color: #1a6b3a; display: block; }
+    .gh-status.error { background: rgba(231,76,60,0.1); color: var(--red); display: block; }
+
+    /* Publish status bar */
+    .publish-status {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: var(--green);
+      color: #fff;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px;
+      z-index: 999;
+      transform: translateY(-100%);
+      transition: transform 0.3s;
+    }
+    .publish-status.show { transform: translateY(0); }
 
     .btn {
       padding: 9px 18px;
@@ -615,6 +688,8 @@
       <h1 id="sectionTitle">ניהול מוצרים</h1>
       <div class="topbar-actions">
         <button class="btn btn-gold" onclick="openModal()">➕ מוצר חדש</button>
+        <button class="btn btn-publish" id="publishBtn" onclick="publishToGitHub()">🚀 פרסם לאתר</button>
+        <button class="btn btn-outline" onclick="openGitHubSettings()" title="הגדרות GitHub">⚙️</button>
         <button class="btn btn-outline" onclick="doLogout()">יציאה</button>
       </div>
     </div>
@@ -722,6 +797,43 @@
     </div><!-- /content -->
   </div><!-- /main -->
 </div><!-- /layout -->
+
+<!-- PUBLISH STATUS BAR -->
+<div class="publish-status" id="publishStatus"></div>
+
+<!-- GITHUB SETTINGS MODAL -->
+<div class="gh-modal-overlay" id="ghModalOverlay">
+  <div class="gh-modal">
+    <div class="gh-modal-header">
+      <h3>⚙️ הגדרות GitHub</h3>
+      <button class="modal-close" onclick="closeGitHubSettings()">×</button>
+    </div>
+    <div class="gh-modal-body">
+      <p style="font-size:13px;color:var(--muted);line-height:1.7">
+        כדי לפרסם שינויים ישירות לאתר, צריך GitHub Personal Access Token עם הרשאת <strong>repo</strong>.
+        <br><a href="https://github.com/settings/tokens/new?scopes=repo&description=derech-eretz-admin" target="_blank" style="color:var(--gold-dark);text-decoration:underline">לחץ כאן ליצירת token →</a>
+      </p>
+      <div class="form-group">
+        <label>GitHub Token</label>
+        <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx" style="direction:ltr;font-family:monospace">
+      </div>
+      <div class="form-group">
+        <label>שם משתמש GitHub</label>
+        <input type="text" id="ghOwner" placeholder="davidan52" value="davidan52" style="direction:ltr">
+      </div>
+      <div class="form-group">
+        <label>שם ה-Repository</label>
+        <input type="text" id="ghRepo" placeholder="derech-eretz" value="derech-eretz" style="direction:ltr">
+      </div>
+      <div class="gh-status" id="ghStatus"></div>
+    </div>
+    <div class="gh-modal-footer">
+      <button class="btn btn-gold" onclick="saveGitHubSettings()">💾 שמור</button>
+      <button class="btn btn-outline" onclick="testGitHubConnection()">🔌 בדוק חיבור</button>
+      <button class="btn btn-outline" onclick="closeGitHubSettings()">ביטול</button>
+    </div>
+  </div>
+</div>
 
 <!-- PRODUCT MODAL -->
 <div class="modal-overlay" id="modalOverlay">
@@ -1106,6 +1218,140 @@ function showToast(msg) {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
 });
+
+// ===== GITHUB SETTINGS =====
+function openGitHubSettings() {
+  const saved = JSON.parse(localStorage.getItem('ghSettings') || '{}');
+  if (saved.token) document.getElementById('ghToken').value = saved.token;
+  if (saved.owner) document.getElementById('ghOwner').value = saved.owner;
+  if (saved.repo)  document.getElementById('ghRepo').value  = saved.repo;
+  document.getElementById('ghStatus').className = 'gh-status';
+  document.getElementById('ghModalOverlay').classList.add('open');
+}
+
+function closeGitHubSettings() {
+  document.getElementById('ghModalOverlay').classList.remove('open');
+}
+
+function saveGitHubSettings() {
+  const settings = {
+    token: document.getElementById('ghToken').value.trim(),
+    owner: document.getElementById('ghOwner').value.trim(),
+    repo:  document.getElementById('ghRepo').value.trim(),
+  };
+  localStorage.setItem('ghSettings', JSON.stringify(settings));
+  showGhStatus('success', '✓ ההגדרות נשמרו');
+  setTimeout(closeGitHubSettings, 1200);
+}
+
+async function testGitHubConnection() {
+  const s = getGhSettings();
+  if (!s) return;
+  showGhStatus('', 'בודק חיבור...');
+  try {
+    const res = await fetch(`https://api.github.com/repos/${s.owner}/${s.repo}`, {
+      headers: { Authorization: `Bearer ${s.token}`, Accept: 'application/vnd.github+json' }
+    });
+    if (res.ok) {
+      showGhStatus('success', '✓ חיבור תקין! מוכן לפרסום');
+    } else {
+      showGhStatus('error', `✗ שגיאה ${res.status} — בדוק token והרשאות`);
+    }
+  } catch {
+    showGhStatus('error', '✗ שגיאת רשת');
+  }
+}
+
+function showGhStatus(type, msg) {
+  const el = document.getElementById('ghStatus');
+  el.textContent = msg;
+  el.className = 'gh-status' + (type ? ' ' + type : '');
+  el.style.display = 'block';
+}
+
+function getGhSettings() {
+  const s = JSON.parse(localStorage.getItem('ghSettings') || '{}');
+  if (!s.token || !s.owner || !s.repo) {
+    openGitHubSettings();
+    showGhStatus('error', 'נא למלא את כל הפרטים ולשמור');
+    return null;
+  }
+  return s;
+}
+
+// ===== PUBLISH TO GITHUB =====
+async function publishToGitHub() {
+  const s = getGhSettings();
+  if (!s) return;
+
+  const btn = document.getElementById('publishBtn');
+  btn.disabled = true;
+  btn.classList.add('loading');
+  btn.textContent = '⏳ מפרסם...';
+
+  try {
+    // 1. Get current file SHA
+    const fileRes = await fetch(
+      `https://api.github.com/repos/${s.owner}/${s.repo}/contents/js/store.js`,
+      { headers: { Authorization: `Bearer ${s.token}`, Accept: 'application/vnd.github+json' } }
+    );
+
+    if (!fileRes.ok) throw new Error(`לא ניתן לקרוא את store.js (${fileRes.status})`);
+    const fileData = await fileRes.json();
+    const sha = fileData.sha;
+    const currentContent = atob(fileData.content.replace(/\n/g, ''));
+
+    // 2. Replace only the PRODUCTS array in store.js
+    const newProductsStr = 'const PRODUCTS = ' + JSON.stringify(adminProducts, null, 2) + ';';
+    const updatedContent = currentContent.replace(
+      /const PRODUCTS = \[[\s\S]*?\];/,
+      newProductsStr
+    );
+
+    // 3. Push updated file
+    const pushRes = await fetch(
+      `https://api.github.com/repos/${s.owner}/${s.repo}/contents/js/store.js`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${s.token}`,
+          Accept: 'application/vnd.github+json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: `עדכון מוצרים – ${new Date().toLocaleString('he-IL')}`,
+          content: btoa(unescape(encodeURIComponent(updatedContent))),
+          sha,
+        }),
+      }
+    );
+
+    if (!pushRes.ok) {
+      const err = await pushRes.json();
+      throw new Error(err.message || pushRes.status);
+    }
+
+    // Success
+    showPublishStatus('✅ פורסם בהצלחה! האתר יתעדכן תוך ~30 שניות');
+    showToast('פורסם לאתר! 🚀');
+
+  } catch (err) {
+    showPublishStatus('❌ שגיאה: ' + err.message, true);
+    showToast('שגיאה בפרסום: ' + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.classList.remove('loading');
+    btn.textContent = '🚀 פרסם לאתר';
+  }
+}
+
+function showPublishStatus(msg, isError = false) {
+  const bar = document.getElementById('publishStatus');
+  bar.textContent = msg;
+  bar.style.background = isError ? '#e74c3c' : '#27ae60';
+  bar.classList.add('show');
+  setTimeout(() => bar.classList.remove('show'), 5000);
+}
 
 // Focus password input on load
 document.getElementById('passwordInput').focus();
