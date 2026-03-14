@@ -52,7 +52,7 @@ const PRODUCTS = [
   {
     "id": 3,
     "title": "תיק טלית גדול עם חלוקה פנימית גוון אפור כהה פיו מפואר 43X36 ס\"מ",
-    "category": "kiddush",
+    "category": "tallitot",
     "badge": "מבצע",
     "price": 260,
     "oldPrice": 320,
