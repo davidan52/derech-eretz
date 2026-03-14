@@ -1,21 +1,21 @@
 // ===== CATEGORY LABELS =====
 const CAT_LABELS = {
-  kiddush:   '×××¡××ª ×§××××©',
-  shabbat:   '×©××ª ××××××',
-  mezuzot:   '××××××ª',
-  tallitot:  '××××ª××ª',
-  tefillin:  '×ª×¤××××',
-  kippot:    '×××¤××ª',
-  hanukkah:  '×× ×××',
-  pesach:    '×¤×¡×',
-  wedding:   '××ª×× ×',
-  tzedakah:  '×§××¤××ª ×¦××§×',
-  jewelry:   '×ª××©××××',
-  synagogue: '××× ×××ª ×× ×¡×ª',
+  kiddush:   'ÃÂÃÂÃÂ¡ÃÂÃÂª ÃÂ§ÃÂÃÂÃÂÃÂ©',
+  shabbat:   'ÃÂ©ÃÂÃÂª ÃÂÃÂÃÂÃÂÃÂÃÂ',
+  mezuzot:   'ÃÂÃÂÃÂÃÂÃÂÃÂª',
+  tallitot:  'ÃÂÃÂÃÂÃÂªÃÂÃÂª',
+  tefillin:  'ÃÂªÃÂ¤ÃÂÃÂÃÂÃÂ',
+  kippot:    'ÃÂÃÂÃÂ¤ÃÂÃÂª',
+  hanukkah:  'ÃÂÃÂ ÃÂÃÂÃÂ',
+  pesach:    'ÃÂ¤ÃÂ¡ÃÂ',
+  wedding:   'ÃÂÃÂªÃÂÃÂ ÃÂ',
+  tzedakah:  'ÃÂ§ÃÂÃÂ¤ÃÂÃÂª ÃÂ¦ÃÂÃÂ§ÃÂ',
+  jewelry:   'ÃÂªÃÂÃÂ©ÃÂÃÂÃÂÃÂ',
+  synagogue: 'ÃÂÃÂÃÂ ÃÂÃÂÃÂª ÃÂÃÂ ÃÂ¡ÃÂª',
 };
 
 // ===== STORE DATA =====
-// Prices below are RETAIL (you set these â typically 2xâ3x your wholesale cost)
+// Prices below are RETAIL (you set these Ã¢ÂÂ typically 2xÃ¢ÂÂ3x your wholesale cost)
 const PRODUCTS = [
   {
     "id": 1,
@@ -294,20 +294,20 @@ const FREE_SHIPPING_THRESHOLD = 199;
 
 // ===== HELPERS =====
 const $ = id => document.getElementById(id);
-const formatPrice = n => `âª${n.toLocaleString('he-IL')}`;
+const formatPrice = n => `Ã¢ÂÂª${n.toLocaleString('he-IL')}`;
 
 function stars(rating) {
   const full = Math.floor(rating);
   const half = rating % 1 >= 0.5;
-  let s = 'â'.repeat(full);
-  if (half) s += 'Â½';
-  while (s.replace('Â½','x').length < 5) s += 'â';
+  let s = 'Ã¢ÂÂ'.repeat(full);
+  if (half) s += 'ÃÂ½';
+  while (s.replace('ÃÂ½','x').length < 5) s += 'Ã¢ÂÂ';
   return s;
 }
 
 function badgeClass(badge) {
   if (!badge) return '';
-  const map = { '×××©': 'new', '×××¦×¢': 'sale', '×××××¥': '' };
+  const map = { 'ÃÂÃÂÃÂ©': 'new', 'ÃÂÃÂÃÂ¦ÃÂ¢': 'sale', 'ÃÂÃÂÃÂÃÂÃÂ¥': '' };
   return map[badge] ?? '';
 }
 
@@ -337,15 +337,15 @@ function renderProducts() {
   const start = (currentPage - 1) * PER_PAGE;
   const page = filtered.slice(start, start + PER_PAGE);
 
-  countEl.innerHTML = `××¦×× <strong>${start + 1}â${Math.min(start + page.length, total)}</strong> ××ª×× <strong>${total}</strong> ×××¦×¨××`;
+  countEl.innerHTML = `ÃÂÃÂ¦ÃÂÃÂ <strong>${start + 1}Ã¢ÂÂ${Math.min(start + page.length, total)}</strong> ÃÂÃÂªÃÂÃÂ <strong>${total}</strong> ÃÂÃÂÃÂ¦ÃÂ¨ÃÂÃÂ`;
 
   grid.innerHTML = page.map(p => `
     <div class="product-card" data-id="${p.id}">
       <div class="product-img-wrap">
         <img src="${p.img}" alt="${p.title}" loading="lazy">
         ${p.badge ? `<span class="badge ${badgeClass(p.badge)}">${p.badge}</span>` : ''}
-        <button class="wishlist-btn" title="×××¡×£ ××××¢××¤××" onclick="toggleWish(event, ${p.id})">â¡</button>
-        <button class="quick-add" onclick="addToCart(${p.id})">+ ×××¡×¤× ××¡×</button>
+        <button class="wishlist-btn" title="ÃÂÃÂÃÂ¡ÃÂ£ ÃÂÃÂÃÂÃÂ¢ÃÂÃÂ¤ÃÂÃÂ" onclick="toggleWish(event, ${p.id})">Ã¢ÂÂ¡</button>
+        <button class="quick-add" onclick="addToCart(${p.id})">+ ÃÂÃÂÃÂ¡ÃÂ¤ÃÂ ÃÂÃÂ¡ÃÂ</button>
       </div>
       <div class="product-info">
         <div class="product-category">${CAT_LABELS[p.category] || ''}</div>
@@ -359,7 +359,7 @@ function renderProducts() {
             ${p.oldPrice ? `<span class="price-old">${formatPrice(p.oldPrice)}</span>` : ''}
             <span class="price">${formatPrice(p.price)}</span>
           </div>
-          <button class="add-to-cart" onclick="addToCart(${p.id})">+ ×××¡×£</button>
+          <button class="add-to-cart" onclick="addToCart(${p.id})">+ ÃÂÃÂÃÂ¡ÃÂ£</button>
         </div>
       </div>
     </div>
@@ -374,17 +374,17 @@ function renderPagination(total) {
   const el = $('pagination');
   if (pages <= 1) { el.innerHTML = ''; return; }
 
-  let html = `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>âº</button>`;
+  let html = `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>Ã¢ÂÂº</button>`;
 
   for (let i = 1; i <= pages; i++) {
     if (i === 1 || i === pages || Math.abs(i - currentPage) <= 2) {
       html += `<button class="page-btn ${i===currentPage?'active':''}" onclick="goPage(${i})">${i}</button>`;
     } else if (Math.abs(i - currentPage) === 3) {
-      html += `<span style="padding:0 4px;color:var(--text-muted)">â¦</span>`;
+      html += `<span style="padding:0 4px;color:var(--text-muted)">Ã¢ÂÂ¦</span>`;
     }
   }
 
-  html += `<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===pages?'disabled':''}>â¹</button>`;
+  html += `<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===pages?'disabled':''}>Ã¢ÂÂ¹</button>`;
   el.innerHTML = html;
 }
 
@@ -421,7 +421,7 @@ function addToCart(id) {
   }
   saveCart();
   updateCartUI();
-  showToast(`"${product.title.slice(0, 25)}..." × ××¡×£ ××¡×`);
+  showToast(`"${product.title.slice(0, 25)}..." ÃÂ ÃÂÃÂ¡ÃÂ£ ÃÂÃÂ¡ÃÂ`);
 }
 
 function removeFromCart(id) {
@@ -456,14 +456,14 @@ function renderCartItems() {
   const progress = Math.min((total / FREE_SHIPPING_THRESHOLD) * 100, 100);
 
   $('freeShippingText').innerHTML = remaining > 0
-    ? `×¢×× <strong>${formatPrice(remaining)}</strong> ×××©××× ××× ×`
-    : `<strong>ð ×§××××ª ××©××× ××× ×!</strong>`;
+    ? `ÃÂ¢ÃÂÃÂ <strong>${formatPrice(remaining)}</strong> ÃÂÃÂÃÂ©ÃÂÃÂÃÂ ÃÂÃÂÃÂ ÃÂ`
+    : `<strong>Ã°ÂÂÂ ÃÂ§ÃÂÃÂÃÂÃÂª ÃÂÃÂ©ÃÂÃÂÃÂ ÃÂÃÂÃÂ ÃÂ!</strong>`;
 
   $('freeShippingProgress').style.width = `${progress}%`;
   $('cartTotal').textContent = formatPrice(total);
 
   if (cart.length === 0) {
-    container.innerHTML = '<div class="cart-empty">ð<br>××¡× ×©×× ×¨××§</div>';
+    container.innerHTML = '<div class="cart-empty">Ã°ÂÂÂ<br>ÃÂÃÂ¡ÃÂ ÃÂ©ÃÂÃÂ ÃÂ¨ÃÂÃÂ§</div>';
     return;
   }
 
@@ -474,12 +474,12 @@ function renderCartItems() {
         <div class="cart-item-name">${item.title}</div>
         <div class="cart-item-price">${formatPrice(item.price * item.qty)}</div>
         <div class="cart-item-qty">
-          <button class="qty-btn" onclick="changeQty(${item.id}, -1)">â</button>
+          <button class="qty-btn" onclick="changeQty(${item.id}, -1)">Ã¢ÂÂ</button>
           <span class="qty-val">${item.qty}</span>
           <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
         </div>
       </div>
-      <button class="remove-item" onclick="removeFromCart(${item.id})" title="××¡×¨">Ã</button>
+      <button class="remove-item" onclick="removeFromCart(${item.id})" title="ÃÂÃÂ¡ÃÂ¨">ÃÂ</button>
     </div>
   `).join('');
 }
@@ -505,10 +505,10 @@ function toggleWish(e, id) {
   const btn = e.currentTarget;
   if (wishlist.includes(id)) {
     wishlist = wishlist.filter(i => i !== id);
-    btn.textContent = 'â¡';
+    btn.textContent = 'Ã¢ÂÂ¡';
   } else {
     wishlist.push(id);
-    btn.textContent = 'â¥';
+    btn.textContent = 'Ã¢ÂÂ¥';
     btn.style.color = '#e74c3c';
   }
   localStorage.setItem('wishlist', JSON.stringify(wishlist));
@@ -568,7 +568,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Checkout
   $('checkoutBtn').addEventListener('click', () => {
-    if (cart.length === 0) { showToast('××¡× ×©×× ×¨××§'); return; }
-    showToast('××¢×××¨ ××ª×©×××...');
+    if (cart.length === 0) { showToast('ÃÂÃÂ¡ÃÂ ÃÂ©ÃÂÃÂ ÃÂ¨ÃÂÃÂ§'); return; }
+    showToast('ÃÂÃÂ¢ÃÂÃÂÃÂ¨ ÃÂÃÂªÃÂ©ÃÂÃÂÃÂ...');
   });
 });
