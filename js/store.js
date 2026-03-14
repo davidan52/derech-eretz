@@ -17,8 +17,19 @@ const CAT_LABELS = {
 // ===== STORE DATA =====
 const PRODUCTS = [
   {
+    "id": 1773521779463,
+    "title": "מזוזה",
+    "category": "mezuzot",
+    "badge": null,
+    "price": 150,
+    "oldPrice": null,
+    "rating": 4.8,
+    "reviews": 0,
+    "img": "https://www.israel-judaica.com/downloads/product_UK24820.jpg הכנס URL לתצוגה מקדימה 💾 שמור מוצרביטול ✓"
+  },
+  {
     "id": 1,
-    "title": "כוס באבא סאלי",
+    "title": "כוס באבא סאלי מהודר",
     "category": "kiddush",
     "badge": "מומלץ",
     "price": 320,
