@@ -51,14 +51,14 @@ const PRODUCTS = [
   },
   {
     "id": 3,
-    "title": "כוס קידוש קריסטל עם בסיס כסף",
+    "title": "תיק טלית גדול עם חלוקה פנימית גוון אפור כהה פיו מפואר 43X36 ס\"מ",
+    "category": "kiddush",
+    "badge": "מבצע",
     "price": 260,
     "oldPrice": 320,
     "rating": 4.8,
     "reviews": 61,
-    "badge": "מבצע",
-    "category": "kiddush",
-    "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80"
+    "img": "https://www.israel-judaica.com/downloads/product_UK60606.webp"
   },
   {
     "id": 4,
