@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ניהול חנות – דרך ארץ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-dark: #a07830;
+      --dark: #1a1208;
+      --mid: #3d2e1e;
+      --muted: #9a8c7e;
+      --border: #e8ddd0;
+      --bg: #fdf9f3;
+      --white: #ffffff;
+      --green: #27ae60;
+      --red: #e74c3c;
+      --radius: 8px;
+      --shadow: 0 2px 12px rgba(60,30,0,0.08);
+    }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      direction: rtl;
+      min-height: 100vh;
+    }
+
+    /* ===== LOGIN SCREEN ===== */
+    #loginScreen {
+      position: fixed;
+      inset: 0;
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .login-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px 36px;
+      width: 340px;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    }
+
+    .login-logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .login-sub {
+      font-size: 12px;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-family: inherit;
+      direction: ltr;
+      text-align: center;
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .login-box input:focus { border-color: var(--gold); }
+
+    .login-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: var(--dark);
+      border: none;
+      padding: 13px;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .login-btn:hover { opacity: 0.9; }
+
+    .login-error {
+      color: var(--red);
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: var(--dark);
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .sidebar-logo {
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .sidebar-logo-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--gold-light);
+    }
+
+    .sidebar-logo-sub {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .sidebar-nav {
+      padding: 16px 0;
+      flex: 1;
+    }
+
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #9a8070;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      cursor: pointer;
+      border-right: 3px solid transparent;
+    }
+
+    .sidebar-nav a:hover { background: rgba(255,255,255,0.04); color: #e0d0b8; }
+    .sidebar-nav a.active { background: rgba(201,168,76,0.1); color: var(--gold-light); border-right-color: var(--gold); }
+    .sidebar-nav a .icon { font-size: 16px; width: 20px; text-align: center; }
+
+    .sidebar-footer {
+      padding: 16px 20px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .view-store-btn {
+      display: block;
+      text-align: center;
+      background: rgba(201,168,76,0.12);
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 6px;
+      padding: 9px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .view-store-btn:hover { background: rgba(201,168,76,0.2); }
+
+    /* ===== MAIN ===== */
+    .main {
+      flex: 1;
+      overflow: auto;
+    }
+
+    .topbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .topbar h1 { font-size: 18px; font-weight: 700; }
+
+    .topbar-actions { display: flex; gap: 10px; }
+
+    .btn {
+      padding: 9px 18px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: var(--dark);
+    }
+
+    .btn-gold:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--mid);
+    }
+
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold-dark); }
+
+    .btn-danger {
+      background: transparent;
+      border: 1.5px solid #fccfcf;
+      color: var(--red);
+    }
+
+    .btn-danger:hover { background: var(--red); color: #fff; }
+
+    .btn-sm { padding: 6px 12px; font-size: 12px; }
+
+    /* ===== CONTENT ===== */
+    .content { padding: 28px; }
+
+    /* Stats */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .stat-icon.gold { background: rgba(201,168,76,0.12); }
+    .stat-icon.green { background: rgba(39,174,96,0.12); }
+    .stat-icon.blue { background: rgba(52,152,219,0.12); }
+    .stat-icon.purple { background: rgba(155,89,182,0.12); }
+
+    .stat-value { font-size: 22px; font-weight: 800; line-height: 1; }
+    .stat-label { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+    /* Product Table */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card-header h2 { font-size: 15px; font-weight: 700; }
+
+    .search-filter {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .search-filter input, .search-filter select {
+      padding: 8px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: inherit;
+      direction: rtl;
+      outline: none;
+      background: var(--bg);
+      transition: border-color 0.2s;
+    }
+
+    .search-filter input:focus,
+    .search-filter select:focus { border-color: var(--gold); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th {
+      background: var(--bg);
+      padding: 11px 16px;
+      text-align: right;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #f5ede0;
+      vertical-align: middle;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fdf6ee; }
+
+    .product-thumb {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+    }
+
+    .product-name-cell { display: flex; align-items: center; gap: 12px; }
+    .product-name-text { font-weight: 600; max-width: 200px; line-height: 1.3; }
+
+    .cat-tag {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(201,168,76,0.1);
+      color: var(--gold-dark);
+      white-space: nowrap;
+    }
+
+    .badge-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .badge-tag.rec { background: rgba(201,168,76,0.15); color: var(--gold-dark); }
+    .badge-tag.new { background: rgba(26,18,8,0.08); color: var(--dark); }
+    .badge-tag.sale { background: rgba(231,76,60,0.1); color: var(--red); }
+
+    .price-cell { font-weight: 700; }
+    .old-price { color: var(--muted); font-size: 11px; text-decoration: line-through; }
+
+    .actions-cell { display: flex; gap: 6px; }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26,18,8,0.55);
+      z-index: 500;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px;
+      overflow-y: auto;
+      backdrop-filter: blur(2px);
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--white);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 640px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+    }
+
+    .modal-header h3 { font-size: 16px; font-weight: 700; }
+
+    .modal-close {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 18px;
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover { border-color: var(--red); color: var(--red); }
+
+    .modal-body { padding: 24px; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--mid);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 10px 13px;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+      direction: rtl;
+      outline: none;
+      background: var(--bg);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      color: var(--dark);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+      background: #fff;
+    }
+
+    .form-group textarea { resize: vertical; min-height: 80px; }
+
+    /* Image preview */
+    .img-preview-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .img-preview {
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      background: var(--dark);
+      color: #f5e9d0;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      z-index: 1000;
+      transform: translateY(16px);
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none;
+      border-right: 3px solid var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state {
+      text-align: center;
+      padding: 48px;
+      color: var(--muted);
+    }
+
+    .empty-state .empty-icon { font-size: 40px; margin-bottom: 12px; }
+    .empty-state p { font-size: 14px; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .sidebar { display: none; }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">דרך ארץ</div>
+    <div class="login-sub">ממשק ניהול</div>
+    <input type="password" id="passwordInput" placeholder="סיסמה" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">כניסה</button>
+    <div class="login-error" id="loginError">סיסמה שגויה</div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="layout" id="adminLayout" style="display:none">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-name">דרך ארץ</div>
+      <div class="sidebar-logo-sub">ניהול חנות</div>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="active" onclick="showSection('products')">
+        <span class="icon">📦</span> מוצרים
+      </a>
+      <a onclick="showSection('add')">
+        <span class="icon">➕</span> הוסף מוצר
+      </a>
+      <a onclick="showSection('orders')">
+        <span class="icon">🛒</span> הזמנות
+      </a>
+      <a onclick="showSection('export')">
+        <span class="icon">📤</span> ייצוא / ייבוא
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="index.html" target="_blank" class="view-store-btn">← צפה בחנות</a>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <h1 id="sectionTitle">ניהול מוצרים</h1>
+      <div class="topbar-actions">
+        <button class="btn btn-gold" onclick="openModal()">➕ מוצר חדש</button>
+        <button class="btn btn-outline" onclick="doLogout()">יציאה</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- STATS -->
+      <div class="stats-row" id="statsRow">
+        <div class="stat-card">
+          <div class="stat-icon gold">📦</div>
+          <div>
+            <div class="stat-value" id="statProducts">0</div>
+            <div class="stat-label">סה"כ מוצרים</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">🏷️</div>
+          <div>
+            <div class="stat-value" id="statCategories">0</div>
+            <div class="stat-label">קטגוריות</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon blue">⭐</div>
+          <div>
+            <div class="stat-value" id="statAvgPrice">₪0</div>
+            <div class="stat-label">מחיר ממוצע</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple">🔥</div>
+          <div>
+            <div class="stat-value" id="statOnSale">0</div>
+            <div class="stat-label">במבצע</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCTS TABLE -->
+      <div class="card" id="sectionProducts">
+        <div class="card-header">
+          <h2>רשימת מוצרים</h2>
+          <div class="search-filter">
+            <input type="text" id="filterSearch" placeholder="🔍 חיפוש..." oninput="renderTable()">
+            <select id="filterCat" onchange="renderTable()">
+              <option value="">כל הקטגוריות</option>
+            </select>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>מוצר</th>
+              <th>קטגוריה</th>
+              <th>מחיר</th>
+              <th>מחיר ישן</th>
+              <th>דירוג</th>
+              <th>תגית</th>
+              <th>פעולות</th>
+            </tr>
+          </thead>
+          <tbody id="productsTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- ADD PRODUCT (quick form) -->
+      <div class="card" id="sectionAdd" style="display:none">
+        <div class="card-header"><h2>➕ הוסף מוצר חדש</h2></div>
+        <div style="padding:24px">
+          <div id="quickFormContainer"></div>
+        </div>
+      </div>
+
+      <!-- ORDERS -->
+      <div class="card" id="sectionOrders" style="display:none">
+        <div class="card-header"><h2>🛒 הזמנות</h2></div>
+        <div class="empty-state">
+          <div class="empty-icon">🛒</div>
+          <p>עדיין אין הזמנות.<br>כאן יופיעו ההזמנות ברגע שתחבר מערכת תשלומים.</p>
+        </div>
+      </div>
+
+      <!-- EXPORT/IMPORT -->
+      <div class="card" id="sectionExport" style="display:none">
+        <div class="card-header"><h2>📤 ייצוא / ייבוא מוצרים</h2></div>
+        <div style="padding:24px; display:flex; flex-direction:column; gap:16px; max-width:500px">
+          <p style="font-size:14px; color:var(--muted); line-height:1.7">
+            ייצא את רשימת המוצרים שלך כקובץ JSON כדי לשמור גיבוי,
+            או ייבא קובץ קיים כדי לטעון מוצרים בבת אחת.
+          </p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <button class="btn btn-gold" onclick="exportProducts()">📥 ייצוא JSON</button>
+            <label class="btn btn-outline" style="cursor:pointer">
+              📤 ייבוא JSON
+              <input type="file" accept=".json" style="display:none" onchange="importProducts(event)">
+            </label>
+            <button class="btn btn-outline" onclick="copyJSON()">📋 העתק JSON</button>
+          </div>
+          <textarea id="jsonPreview" readonly
+            style="width:100%;height:220px;padding:12px;border:1.5px solid var(--border);border-radius:8px;
+            font-size:12px;font-family:monospace;direction:ltr;resize:vertical;background:#fdf9f3;outline:none"></textarea>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /layout -->
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">מוצר חדש</h3>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full">
+          <label>שם המוצר *</label>
+          <input type="text" id="fTitle" placeholder="למשל: כוס קידוש כסף 925 – עיצוב קלאסי">
+        </div>
+        <div class="form-group">
+          <label>קטגוריה *</label>
+          <select id="fCategory">
+            <option value="kiddush">כוסות קידוש</option>
+            <option value="shabbat">שבת והבדלה</option>
+            <option value="mezuzot">מזוזות</option>
+            <option value="tallitot">טליתות</option>
+            <option value="tefillin">תפילין</option>
+            <option value="kippot">כיפות</option>
+            <option value="hanukkah">חנוכה</option>
+            <option value="pesach">פסח</option>
+            <option value="wedding">חתונה</option>
+            <option value="tzedakah">קופות צדקה</option>
+            <option value="jewelry">תכשיטים</option>
+            <option value="synagogue">כלי בית כנסת</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>תגית</label>
+          <select id="fBadge">
+            <option value="">ללא תגית</option>
+            <option value="מומלץ">מומלץ</option>
+            <option value="חדש">חדש</option>
+            <option value="מבצע">מבצע</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>מחיר (₪) *</label>
+          <input type="number" id="fPrice" placeholder="0" min="0" step="1">
+        </div>
+        <div class="form-group">
+          <label>מחיר ישן (₪)</label>
+          <input type="number" id="fOldPrice" placeholder="השאר ריק אם אין" min="0" step="1">
+        </div>
+        <div class="form-group">
+          <label>דירוג (1–5)</label>
+          <input type="number" id="fRating" placeholder="4.8" min="1" max="5" step="0.1">
+        </div>
+        <div class="form-group">
+          <label>מספר ביקורות</label>
+          <input type="number" id="fReviews" placeholder="0" min="0" step="1">
+        </div>
+        <div class="form-group full">
+          <label>קישור לתמונה (URL)</label>
+          <input type="url" id="fImg" placeholder="https://..." oninput="previewImg()" style="direction:ltr">
+          <div class="img-preview-wrap">
+            <img id="imgPreview" class="img-preview" src="" alt="" style="display:none">
+            <span id="imgPreviewHint" style="font-size:12px;color:var(--muted)">הכנס URL לתצוגה מקדימה</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-gold" onclick="saveProduct()">💾 שמור מוצר</button>
+      <button class="btn btn-outline" onclick="closeModal()">ביטול</button>
+      <button class="btn btn-danger btn-sm" id="deleteBtn" onclick="deleteProduct()" style="margin-right:auto;display:none">🗑️ מחק</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span>✓</span>
+  <span id="toastMsg"></span>
+</div>
+
+<script src="js/store.js"></script>
+<script>
+// ===== ADMIN PASSWORD =====
+const ADMIN_PASS = 'derech2024';
+
+function doLogin() {
+  const val = document.getElementById('passwordInput').value;
+  if (val === ADMIN_PASS) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminLayout').style.display = 'flex';
+    initAdmin();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('passwordInput').value = '';
+    document.getElementById('passwordInput').focus();
+  }
+}
+
+function doLogout() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('adminLayout').style.display = 'none';
+}
+
+// ===== ADMIN STATE =====
+let adminProducts = JSON.parse(localStorage.getItem('adminProducts') || 'null');
+if (!adminProducts) {
+  // Load from PRODUCTS array defined in store.js
+  adminProducts = PRODUCTS.map(p => ({ ...p }));
+  saveAdminProducts();
+}
+
+let editingId = null;
+
+function saveAdminProducts() {
+  localStorage.setItem('adminProducts', JSON.stringify(adminProducts));
+}
+
+// ===== INIT =====
+function initAdmin() {
+  populateCatFilter();
+  renderTable();
+  updateStats();
+  updateJsonPreview();
+}
+
+function updateStats() {
+  document.getElementById('statProducts').textContent = adminProducts.length;
+  const cats = new Set(adminProducts.map(p => p.category)).size;
+  document.getElementById('statCategories').textContent = cats;
+  const avg = adminProducts.length
+    ? Math.round(adminProducts.reduce((s, p) => s + p.price, 0) / adminProducts.length)
+    : 0;
+  document.getElementById('statAvgPrice').textContent = '₪' + avg.toLocaleString('he-IL');
+  const onSale = adminProducts.filter(p => p.oldPrice).length;
+  document.getElementById('statOnSale').textContent = onSale;
+}
+
+// ===== NAV =====
+function showSection(name) {
+  ['products','add','orders','export'].forEach(s => {
+    const el = document.getElementById('section' + s.charAt(0).toUpperCase() + s.slice(1));
+    if (el) el.style.display = (s === name) ? 'block' : 'none';
+  });
+  document.getElementById('statsRow').style.display = (name === 'products') ? 'grid' : 'none';
+  const titles = { products: 'ניהול מוצרים', add: 'הוסף מוצר', orders: 'הזמנות', export: 'ייצוא / ייבוא' };
+  document.getElementById('sectionTitle').textContent = titles[name] || '';
+  document.querySelectorAll('.sidebar-nav a').forEach((a, i) => {
+    a.classList.toggle('active', ['products','add','orders','export'][i] === name);
+  });
+  if (name === 'export') updateJsonPreview();
+}
+
+// ===== CATEGORY FILTER =====
+function populateCatFilter() {
+  const sel = document.getElementById('filterCat');
+  const cats = [...new Set(adminProducts.map(p => p.category))];
+  cats.forEach(c => {
+    const o = document.createElement('option');
+    o.value = c;
+    o.textContent = CAT_LABELS[c] || c;
+    sel.appendChild(o);
+  });
+}
+
+// ===== TABLE =====
+function renderTable() {
+  const q = document.getElementById('filterSearch').value.toLowerCase();
+  const cat = document.getElementById('filterCat').value;
+
+  let list = adminProducts.filter(p => {
+    const matchQ = !q || p.title.toLowerCase().includes(q);
+    const matchCat = !cat || p.category === cat;
+    return matchQ && matchCat;
+  });
+
+  const tbody = document.getElementById('productsTableBody');
+
+  if (list.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="7">
+      <div class="empty-state"><div class="empty-icon">🔍</div><p>לא נמצאו מוצרים</p></div>
+    </td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = list.map(p => `
+    <tr>
+      <td>
+        <div class="product-name-cell">
+          <img class="product-thumb" src="${p.img || ''}" alt="" onerror="this.src=''">
+          <div class="product-name-text">${p.title}</div>
+        </div>
+      </td>
+      <td><span class="cat-tag">${CAT_LABELS[p.category] || p.category}</span></td>
+      <td class="price-cell">₪${p.price.toLocaleString('he-IL')}</td>
+      <td>${p.oldPrice ? `<span class="old-price">₪${p.oldPrice.toLocaleString('he-IL')}</span>` : '—'}</td>
+      <td>${p.rating ? '⭐ ' + p.rating : '—'}</td>
+      <td>${p.badge ? `<span class="badge-tag ${badgeTagClass(p.badge)}">${p.badge}</span>` : '—'}</td>
+      <td>
+        <div class="actions-cell">
+          <button class="btn btn-outline btn-sm" onclick="openModal(${p.id})">✏️ עריכה</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function badgeTagClass(badge) {
+  if (badge === 'מומלץ') return 'rec';
+  if (badge === 'חדש') return 'new';
+  if (badge === 'מבצע') return 'sale';
+  return '';
+}
+
+// ===== MODAL =====
+function openModal(id) {
+  editingId = id || null;
+  const modal = document.getElementById('modalOverlay');
+  const deleteBtn = document.getElementById('deleteBtn');
+
+  if (id) {
+    const p = adminProducts.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('modalTitle').textContent = 'עריכת מוצר';
+    document.getElementById('fTitle').value = p.title;
+    document.getElementById('fCategory').value = p.category;
+    document.getElementById('fBadge').value = p.badge || '';
+    document.getElementById('fPrice').value = p.price;
+    document.getElementById('fOldPrice').value = p.oldPrice || '';
+    document.getElementById('fRating').value = p.rating || '';
+    document.getElementById('fReviews').value = p.reviews || '';
+    document.getElementById('fImg').value = p.img || '';
+    previewImg();
+    deleteBtn.style.display = 'inline-flex';
+  } else {
+    document.getElementById('modalTitle').textContent = 'מוצר חדש';
+    document.getElementById('fTitle').value = '';
+    document.getElementById('fCategory').value = 'kiddush';
+    document.getElementById('fBadge').value = '';
+    document.getElementById('fPrice').value = '';
+    document.getElementById('fOldPrice').value = '';
+    document.getElementById('fRating').value = '4.8';
+    document.getElementById('fReviews').value = '0';
+    document.getElementById('fImg').value = '';
+    document.getElementById('imgPreview').style.display = 'none';
+    document.getElementById('imgPreviewHint').style.display = '';
+    deleteBtn.style.display = 'none';
+  }
+
+  modal.classList.add('open');
+  document.getElementById('fTitle').focus();
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  editingId = null;
+}
+
+function previewImg() {
+  const url = document.getElementById('fImg').value.trim();
+  const img = document.getElementById('imgPreview');
+  const hint = document.getElementById('imgPreviewHint');
+  if (url) {
+    img.src = url;
+    img.style.display = 'block';
+    hint.style.display = 'none';
+  } else {
+    img.style.display = 'none';
+    hint.style.display = '';
+  }
+}
+
+// ===== SAVE =====
+function saveProduct() {
+  const title = document.getElementById('fTitle').value.trim();
+  const price = parseFloat(document.getElementById('fPrice').value);
+
+  if (!title) { alert('נא להזין שם מוצר'); return; }
+  if (!price || price <= 0) { alert('נא להזין מחיר תקין'); return; }
+
+  const product = {
+    id: editingId || Date.now(),
+    title,
+    category: document.getElementById('fCategory').value,
+    badge: document.getElementById('fBadge').value || null,
+    price,
+    oldPrice: parseFloat(document.getElementById('fOldPrice').value) || null,
+    rating: parseFloat(document.getElementById('fRating').value) || 4.8,
+    reviews: parseInt(document.getElementById('fReviews').value) || 0,
+    img: document.getElementById('fImg').value.trim() ||
+      'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80',
+  };
+
+  if (editingId) {
+    const idx = adminProducts.findIndex(p => p.id === editingId);
+    if (idx !== -1) adminProducts[idx] = product;
+    showToast('המוצר עודכן בהצלחה ✓');
+  } else {
+    adminProducts.unshift(product);
+    showToast('המוצר נוסף בהצלחה ✓');
+  }
+
+  saveAdminProducts();
+  syncToStore();
+  renderTable();
+  updateStats();
+  closeModal();
+}
+
+function deleteProduct() {
+  if (!editingId) return;
+  const p = adminProducts.find(x => x.id === editingId);
+  if (!confirm(`האם למחוק את "${p?.title}"?`)) return;
+  adminProducts = adminProducts.filter(x => x.id !== editingId);
+  saveAdminProducts();
+  syncToStore();
+  renderTable();
+  updateStats();
+  closeModal();
+  showToast('המוצר נמחק');
+}
+
+// Sync admin products back to store's PRODUCTS array in memory
+function syncToStore() {
+  PRODUCTS.length = 0;
+  adminProducts.forEach(p => PRODUCTS.push(p));
+}
+
+// ===== EXPORT / IMPORT =====
+function updateJsonPreview() {
+  document.getElementById('jsonPreview').value = JSON.stringify(adminProducts, null, 2);
+}
+
+function exportProducts() {
+  updateJsonPreview();
+  const blob = new Blob([JSON.stringify(adminProducts, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'derech-eretz-products.json';
+  a.click();
+  showToast('הקובץ יוצא בהצלחה');
+}
+
+function importProducts(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (!Array.isArray(data)) throw new Error('invalid');
+      adminProducts = data;
+      saveAdminProducts();
+      syncToStore();
+      renderTable();
+      updateStats();
+      updateJsonPreview();
+      showToast(`יובאו ${data.length} מוצרים בהצלחה`);
+    } catch {
+      alert('קובץ JSON לא תקין');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
+
+function copyJSON() {
+  updateJsonPreview();
+  navigator.clipboard.writeText(document.getElementById('jsonPreview').value)
+    .then(() => showToast('הועתק ללוח'))
+    .catch(() => showToast('שגיאה בהעתקה'));
+}
+
+// ===== TOAST =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ===== KEYBOARD =====
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// Focus password input on load
+document.getElementById('passwordInput').focus();
+</script>
+</body>
+</html>
