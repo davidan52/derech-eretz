@@ -17,30 +17,8 @@ const CAT_LABELS = {
 // ===== STORE DATA =====
 const PRODUCTS = [
   {
-    "id": 1773524550806,
-    "title": "חנוכייה אלומיניום לנרות מהודרת 27x5",
-    "category": "hanukkah",
-    "badge": "חדש",
-    "price": 250,
-    "oldPrice": null,
-    "rating": 4.8,
-    "reviews": 0,
-    "img": "https://www.israel-judaica.com/downloads/product_UK42374.jpg"
-  },
-  {
-    "id": 1773521779463,
-    "title": "מזוזה \"סמנט בטון\" \"האש שלי\" רחבה גוון לבן 12 ס\"מ",
-    "category": "mezuzot",
-    "badge": null,
-    "price": 150,
-    "oldPrice": null,
-    "rating": 4.8,
-    "reviews": 0,
-    "img": "https://www.israel-judaica.com/downloads/product_UK24820.jpg"
-  },
-  {
     "id": 1,
-    "title": "כוס באבא סאלי מהודר",
+    "title": "כוס באבא סאלי",
     "category": "kiddush",
     "badge": "מומלץ",
     "price": 320,
@@ -62,25 +40,25 @@ const PRODUCTS = [
   },
   {
     "id": 3,
-    "title": "תיק טלית גדול עם חלוקה פנימית גוון אפור כהה פיו מפואר 43X36 ס\"מ",
-    "category": "tallitot",
-    "badge": "מבצע",
+    "title": "כוס קידוש קריסטל עם בסיס כסף",
     "price": 260,
     "oldPrice": 320,
     "rating": 4.8,
     "reviews": 61,
-    "img": "https://www.israel-judaica.com/downloads/product_UK60606.webp"
+    "badge": "מבצע",
+    "category": "kiddush",
+    "img": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=80"
   },
   {
     "id": 4,
-    "title": "פמוטים מכסף – זוג, עיצוב ירושלמי זוג פמוטים \"פולימר\" \"כותל\" מהודרים 12 ס\"מ",
-    "category": "shabbat",
-    "badge": "מומלץ",
+    "title": "פמוטים מכסף – זוג, עיצוב ירושלמי",
     "price": 420,
     "oldPrice": 520,
     "rating": 4.9,
     "reviews": 102,
-    "img": "https://www.israel-judaica.com/downloads/product_UK81482.jpg"
+    "badge": "מומלץ",
+    "category": "shabbat",
+    "img": "https://images.unsplash.com/photo-1574634534894-89d7576c8259?w=400&q=80"
   },
   {
     "id": 5,
